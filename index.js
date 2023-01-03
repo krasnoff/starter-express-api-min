@@ -1,7 +1,29 @@
-const express = require('express')
-const app = express()
-app.all('/', (req, res) => {
+const express = require('express');
+const app = express();
+const { Configuration, OpenAIApi } = require("openai");
+
+require('dotenv').config()
+
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
+
+app.use(express.json());
+
+app.post('/', async (req, res) => {
     console.log("Just got a request!")
-    res.send('Yo!')
+    
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: req.body.body,
+        max_tokens: 100,
+        temperature: 0.9,
+    });
+
+    res.json(response.data);
+    // res.json('ff');
 })
+
 app.listen(process.env.PORT || 3000)
