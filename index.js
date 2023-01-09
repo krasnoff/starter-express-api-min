@@ -12,6 +12,9 @@ const openai = new OpenAIApi(configuration);
 
 app.use(express.json());
 
+// server.use(cors({ origin: appConfig.frontendUrl })); // Enable only to our frontend.
+server.use(cors({ origin: '*' }));
+
 app.post('/', async (req, res) => {
     console.log("Just got a request!")
     
