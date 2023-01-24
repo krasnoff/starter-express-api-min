@@ -14,7 +14,7 @@ const openai = new OpenAIApi(configuration);
 app.use(express.json());
 
 // server.use(cors({ origin: appConfig.frontendUrl })); // Enable only to our frontend.
-app.use(cors({ origin: ['https://chat-gpt-kobi-krasnoff.surge.sh', 'http://192.168.68.112:3000'] }));
+app.use(cors({ origin: ['https://chat-gpt-kobi-krasnoff.surge.sh'] }));
 
 app.post('/', async (req, res) => {
     console.log("Just got a request!")
